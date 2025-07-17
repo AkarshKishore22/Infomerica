@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise AI Platform – Infodata2AI</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet" />
+
+    <style>
+      /* ─── Base reset ─────────────────────────────────────────── */
+      * { margin: 0; 
+        padding: 0; 
+        box-sizing: 
+        border-box; 
+        font-family: 'Roboto', sans-serif; 
+        }
+      body { background: #f5f6f5; 
+             color: #121212; 
+             line-height: 1.6; 
+            }
+
+      /* Header */
+      header { background:#c8102e; color:#fff; 
+        padding:1rem 0; 
+        position:fixed; 
+        width:100%; top:0; 
+        z-index:1000; }
+      .header-container{max-width:1200px; 
+        margin:0 auto; 
+        display:flex; 
+        justify-content:space-between; 
+        align-items:center; 
+        padding:0 2rem;}
+      .header-container img{height:40px;}
+      nav a{color:#fff; 
+        text-decoration:none; 
+        margin-left:1.5rem; 
+        font-weight:400; 
+        position:relative; 
+        transition:color .3s;}
+      nav a:hover{color:#ffd700;}
+      nav a::after{content:""; 
+        position:absolute; 
+        width:0; 
+        height:2px; 
+        bottom:-4px; 
+        left:0; 
+        background:#ffd700; 
+        transition:width .3s;}
+      nav a:hover::after{width:100%;}
+
+      /* Hero */
+      .hero{background:radial-gradient(circle at center,#c8102e 0%,#4b0082 100%); 
+        color:#fff; 
+        padding:6rem 2rem 5rem;
+        margin-top:60px; 
+        min-height:680px; 
+        text-align:center; 
+        display:flex; 
+        flex-direction:column; 
+        justify-content:center; 
+        align-items:center;}
+      .hero img{width:100px; 
+        margin-bottom:1.5rem;}
+      .hero h1{font-size:2.8rem; 
+        margin-bottom:.8rem; 
+        font-weight:700; 
+        text-shadow:2px 2px 4px rgba(0,0,0,.4);}
+      .hero p{font-size:1.25rem; 
+        max-width:650px; 
+        margin:0 auto 1.8rem; 
+        text-shadow:1px 1px 2px rgba(0,0,0,.4);}
+
+      /* Buttons */
+      .btn{display:inline-block; 
+        padding:.85rem 2rem; 
+        font-size:1rem; 
+        font-weight:600; 
+        border-radius:30px; 
+        text-decoration:none; 
+        box-shadow:0 4px 10px rgba(0,0,0,.1); 
+        transition:transform .25s, filter .25s;}
+      .btn-primary{background:linear-gradient(135deg,#f05a28 0%,#ea4335 100%); 
+        color:#fff;}
+      .btn-secondary{background:linear-gradient(135deg,#4d4d4d 0%,#262626 100%); 
+        color:#fff;}
+      .btn-primary:hover{transform:translateY(-4px) scale(1.04); 
+        filter:brightness(1.07);}
+      .btn-secondary:hover{transform:translateY(4px) scale(1.04); 
+        filter:brightness(1.07);}
+
+      /* Generic section wrapper */
+      .content{max-width:1200px; 
+        margin:4rem auto 0; 
+        padding:0 2rem; 
+        text-align:center;}
+      .content h2{font-size:2.3rem; 
+        color:#c8102e; 
+        text-transform:uppercase; 
+        font-weight:700; 
+        margin-bottom:1.2rem; 
+        position:relative; 
+        display:inline-block;}
+      .content h2::after{content:""; 
+        width:110px; 
+        height:3px; 
+        background:#0045ff; 
+        position:absolute; 
+        left:50%; 
+        bottom:-6px; 
+        transform:translateX(-50%);}
+      .content>p{max-width:740px; 
+        margin:0 auto 2rem;}
+
+      /* Tab navigation */
+      .nav-tabs{display:flex; 
+        justify-content:center; 
+        gap:2rem; 
+        margin-bottom:2.2rem; 
+        flex-wrap:wrap;}
+      .nav-tabs a{
+        color:#1a1a1a; 
+        font-weight:500; 
+        text-decoration:none; 
+        transition:color .3s; 
+        padding-bottom:.4rem;}
+
+      .nav-tabs a:hover{color:#c8102e;}
+      .nav-tabs a.active{color:#c8102e; 
+        border-bottom:2px solid #f05a28;}
+
+      /* Cards (shared) */
+      .cards{display:flex; 
+        justify-content:center; 
+        gap:1.5rem; 
+        flex-wrap:wrap;}
+      .card{background:#fff; 
+        width:260px; 
+        border-radius:12px; 
+        text-align:center; 
+        padding:1.8rem 1.4rem; 
+        box-shadow:0 4px 10px rgba(0,0,0,.07); 
+        transition:transform .3s;}
+      .card:hover{transform:translateY(-6px);}
+      .card img{width:52px; 
+        margin-bottom:1.1rem;}
+      .card h3{font-size:1.35rem; 
+        color:#c8102e; 
+        margin-bottom:.6rem; 
+        position:relative; 
+        display:inline-block;}
+      .card h3::after{content:""; 
+        position:absolute; 
+        left:0; 
+        bottom:-3px; 
+        width:100%; 
+        height:3px; 
+        background:linear-gradient(90deg,#c8102e,#4b0082); 
+        transform:scaleX(0); 
+        transform-origin:left; 
+        transition:transform .3s;}
+      .card h3:hover::after{transform:scaleX(1);} 
+      .card p{color:#2e2e2e; 
+        font-size:1rem; 
+        line-height:1.4;}
+      .cards.hidden{display:none;}
+
+      /* Checklist inside card */
+      .card ul{list-style:none; 
+        padding-left:0; 
+        margin-top:1rem; 
+        text-align:left;}
+      .card li{position:relative; 
+        padding-left:1.4rem; 
+        margin-bottom:.45rem; 
+        color:#2e2e2e; 
+        font-size:.95rem;}
+      .card li::before{content:"✓"; 
+        position:absolute; 
+        left:0; top:0; 
+        color:#12b886; 
+        font-weight:700;}
+
+      /* Footer */
+      footer{background:#c8102e; 
+        color:#fff; 
+        text-align:center; 
+        padding:2rem 0; 
+        margin-top:4rem;}
+      footer a{color:#ffd700; 
+        text-decoration:none; 
+        margin:0 .5rem; 
+        font-weight:500;}
+      footer a:hover{text-decoration:underline;}
+
+      .cloud-cards{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      /* Responsive */
+      @media(max-width:768px){
+        .hero h1{font-size:1.9rem;}
+        .hero p{font-size:1rem;}
+        .nav-tabs{overflow-x:auto; 
+            gap:1rem; 
+            flex-wrap:nowrap;}
+        .cards{gap:1rem;}
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="header-container">
+        <img src="https://via.placeholder.com/80?text=Logo" alt="Infodata2AI Logo" />
+        <nav>
+          <a href="#rag">RAG &amp; Intelligence</a>
+          <a href="#model">Model Management</a>
+          <a href="#analytics">Rich Analytics</a>
+          <a href="#security">Enterprise Security</a>
+          <a href="#experience">Advanced Experience</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <img src="https://via.placeholder.com/100?text=Logo" alt="Logo" />
+      <h1>Enterprise AI Platform for Intelligent Data</h1>
+      <p>
+        Leverage state‑of‑the‑art RAG capabilities, multi‑model flexibility, and
+        enterprise‑grade security with Infodata2AI’s comprehensive solution.
+      </p>
+      <a href="#request-demo" class="btn btn-primary">Request Demo</a>
+      <a href="#platform" class="btn btn-secondary">Learn More</a>
+    </section>
+
+    <section class="content" id="platform">
+      <h2>Enterprise AI Platform</h2>
+      <p>
+        Comprehensive end‑to‑end solution for organisations seeking to harness
+        the power of AI with their data.
+      </p>
+
+      <div class="nav-tabs" id="nav-tabs">
+        <!-- <a href="#rag-cards" class="active" onclick="showCards('rag')">RAG &amp; Intelligence</a>
+        <a href="#model-cards" onclick="showCards('model')">Model Management</a>
+        <a href="#analytics-cards" onclick="showCards('analytics')">Rich Analytics</a>
+        <a href="#security-cards" onclick="showCards('security')">Enterprise Security</a>
+        <a href="#experience-cards" onclick="showCards('experience')">Advanced Experience</a> -->
+        <a href="#rag-cards" class="active" onclick="event.preventDefault(); showCards('rag')">RAG &amp; Intelligence</a>
+        <a href="#model-cards" onclick="event.preventDefault(); showCards('model')">Model Management</a>
+        <a href="#analytics-cards" onclick="event.preventDefault(); showCards('analytics')">Rich Analytics</a>
+        <a href="#security-cards" onclick="event.preventDefault(); showCards('security')">Enterprise Security</a>
+        <a href="#experience-cards" onclick="event.preventDefault(); showCards('experience')">Advanced Experience</a>
+      </div>
+
+      <div class="cards-container">
+        <!-- RAG cards -->
+        <div id="rag-cards" class="cards">
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=RAG1" alt="RAG icon 1" />
+            <h3>Advanced RAG</h3>
+            <p>Hybrid search with BM25 &amp; Cross‑Encoder re‑ranking for precise retrieval.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=RAG2" alt="RAG icon 2" />
+            <h3>Multi‑Source RAG</h3>
+            <p>Connect to varied sources for comprehensive information coverage.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=RAG3" alt="RAG icon 3" />
+            <h3>Intelligent Search</h3>
+            <p>Enhanced search capabilities with AI‑driven insights.</p>
+          </div>
+        </div>
+
+        <div id="model-cards" class="cards hidden">
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Model1" alt="Model icon 1" />
+            <h3>Model Workspace</h3>
+            <p>Easily create and manage models with a visual builder.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Model2" alt="Model icon 2" />
+            <h3>Multi‑Model Support</h3>
+            <p>Switch models seamlessly during conversations.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Model3" alt="Model icon 3" />
+            <h3>Custom Presets</h3>
+            <p>Create tailored presets for repeated use‑cases.</p>
+          </div>
+        </div>
+
+        <div id="analytics-cards" class="cards hidden">
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Ana1" alt="Analytics icon 1" />
+            <h3>Data Insights</h3>
+            <p>Gain deep, actionable insights from your data lakes.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Ana2" alt="Analytics icon 2" />
+            <h3>Real‑Time Reports</h3>
+            <p>Monitor KPIs and metrics in real‑time across dashboards.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Ana3" alt="Analytics icon 3" />
+            <h3>Predictive Analysis</h3>
+            <p>Leverage predictive models to forecast future trends.</p>
+          </div>
+        </div>
+
+        <div id="security-cards" class="cards hidden">
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Sec1" alt="Security icon 1" />
+            <h3>Enterprise Security</h3>
+            <p>Robust protocols to safeguard mission‑critical data.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Sec2" alt="Security icon 2" />
+            <h3>Access Control</h3>
+            <p>Fine‑grained IAM controls &amp; policy enforcement.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Sec3" alt="Security icon 3" />
+            <h3>Encryption</h3>
+            <p>End‑to‑end encryption across data in‑motion &amp; at‑rest.</p>
+          </div>
+        </div>
+
+        <div id="experience-cards" class="cards hidden">
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Exp1" alt="Experience icon 1" />
+            <h3>Advanced Interface</h3>
+            <p>Modern, intuitive UI design for maximum productivity.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Exp2" alt="Experience icon 2" />
+            <h3>Function Calling</h3>
+            <p>Trigger functions directly from natural‑language chat.</p>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/50?text=Exp3" alt="Experience icon 3" />
+            <h3>API Integration</h3>
+            <p>Seamless integration with internal &amp; external APIs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" id="cloud">
+      <h2>Enterprise‑Ready Cloud Solutions</h2>
+      <p>Deploy Infodata2AI on the cloud infrastructure that fits your enterprise needs.</p>
+
+      <div class=" cloud-cards">
+        <!-- AWS -->
+        <div class="card">
+          <img src="https://via.placeholder.com/50?text=AWS" alt="AWS icon" />
+          <h3>AWS Deployment</h3>
+          <p>Optimised EC2 infrastructure with auto‑scaling & global reach.</p>
+          <ul>
+            <li>EC2 g5 GPU instances</li>
+            <li>Elastic Auto‑Scaling</li>
+            <li>S3 integration for durable storage</li>
+            <li>IAM‑based security controls</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/50?text=AZ" alt="Azure icon" />
+          <h3>Azure Deployment</h3>
+          <p>Enterprise‑grade compliance & seamless Microsoft ecosystem integration.</p>
+          <ul>
+            <li>Azure GPU virtual machines</li>
+            <li>Azure Active Directory SSO</li>
+            <li>Compliance‑ready certifications</li>
+            <li>99.9% SLA uptime</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Infomerica, Inc. All rights reserved.</p>
+      <p>
+        <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a> | <a href="#contact">Contact Us</a>
+      </p>
+    </footer>
+
+    <script>
+      function showCards(tab){
+        document.querySelectorAll('.cards').forEach(set=>set.classList.add('hidden'));
+        document.querySelectorAll('.nav-tabs a').forEach(link=>link.classList.remove('active'));
+        document.getElementById(tab+'-cards').classList.remove('hidden');
+        document.querySelector(`.nav-tabs a[href="#${tab}-cards"]`).classList.add('active');
+      }
+      window.onload=()=>showCards('rag');
+    </script>
+  </body>
+</html>
