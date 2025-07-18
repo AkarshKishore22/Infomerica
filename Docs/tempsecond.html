@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise AI Platform – Infodata2AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --infomerica-blue: #005bab;
+      --infomerica-darkblue: #00336a;
+      --infomerica-red: #e31937;
+      --neutral-gray: #374151;
+      --neutral-light: #f3f4f6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+
+    body {
+      background: #fff;
+      color: var(--neutral-gray);
+      line-height: 1.6;
+    }
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease forwards;
+    }
+    .fade-in-delayed {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s 0.4s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .slide-in-left { opacity:0; animation:slideInLeft 1.1s ease forwards;}
+    @keyframes slideInLeft {
+      to { opacity:1; transform: none; }
+      from { opacity:0; transform:translateX(-60px);}
+    }
+    /* Header and hero text with text shadow */
+    header, .hero, h1, h2, .card h3 {
+      text-shadow: 0 2px 16px rgba(0,91,186,0.18), 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .hero h1, h1, h2, h3 {
+      text-shadow: 0 2px 8px rgba(0,91,186,0.30), 1px 2px 1px rgba(50,50,50,0.10);
+    }
+    /* ...previous styles remain unchanged... */
+    /* Card hover animation */
+    .card {
+      transition: transform 0.3s cubic-bezier(.4,2,.7,1), box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.033);
+      box-shadow: 0 10px 24px rgba(227,25,55,0.17);
+      border-color: var(--infomerica-red);
+    }
+    /* Button hover animations */
+    .btn {
+      transition: transform 0.22s cubic-bezier(.3,1.85,.67,1), filter 0.25s, box-shadow 0.22s;
+      box-shadow: 0 2px 10px rgba(0, 91, 171, 0.11);
+    }
+    .btn:hover {
+      transform: scale(1.045) translateY(-4px);
+      filter: brightness(1.13);
+      box-shadow: 0 6px 15px rgba(0,91,171,0.22);
+    }
+    /* Tab panel and links animation */
+    .nav-tabs a {
+      transition: color 0.2s, border-bottom 0.22s, background 0.19s;
+    }
+    .nav-tabs a:hover, .nav-tabs a.active {
+      color: var(--infomerica-red);
+      border-bottom: 2px solid var(--infomerica-red);
+      background: rgba(227,25,55,0.09);
+    }
+    /* Text shadows for increased readability */
+    h1, h2, h3, .hero p, .content > p {
+      text-shadow: 0 2px 8px rgba(0,91,186,0.18), 0.5px 1.5px 1px rgba(0,0,0,0.10);
+    }
+    /* Animated icons (example) */
+    .card img {
+      will-change: transform;
+      transition: transform 0.35s cubic-bezier(.3,.8,.5,1.1);
+    }
+    .card:hover img {
+      transform: scale(1.08) rotate(-6deg);
+    }
+    /* Reveal animation for cards container on scroll */
+    .cards { opacity:0; transition:opacity 1s; }
+    .cards.visible { opacity:1; }
+
+    /* Responsive remains as before… */
+    @media(max-width: 768px) { .hero h1{font-size:1.9rem;} .hero p{font-size: 1rem;} }
+
+  </style>
+</head>
+<body>
+  <header class="fade-in">
+    <div class="header-container">
+      <img src="https://via.placeholder.com/80x40/005bab/ffffff?text=Infomerica" alt="Infomerica Logo" />
+      <nav>
+        <a href="#platform">RAG & Intelligence</a>
+        <a href="#model">Model Management</a>
+        <a href="#analytics">Rich Analytics</a>
+        <a href="#security">Enterprise Security</a>
+        <a href="#experience">Advanced Experience</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero fade-in-delayed">
+    <img src="https://via.placeholder.com/100x100/ffffff/005bab?text=AI" alt="Logo" />
+    <h1>Enterprise AI Platform for Intelligent Data</h1>
+    <p>Leverage state‑of‑the‑art RAG capabilities, multi‑model flexibility, and enterprise‑grade security with Infodata2AI's comprehensive solution.</p>
+    <a href="#request-demo" class="btn btn-primary">Request Demo</a>
+    <a href="#platform" class="btn btn-secondary">Learn More</a>
+  </section>
+
+  <div class="section-bg">
+    <section class="content" id="platform">
+      <h2 class="fade-in">Enterprise AI Platform</h2>
+      <p class="fade-in-delayed">Comprehensive end‑to‑end solution for organisations seeking to harness the power of AI with their data.</p>
+      <div class="nav-tabs">
+        <a href="#rag-cards" class="active">RAG & Intelligence</a>
+        <a href="#model-cards">Model Management</a>
+        <a href="#analytics-cards">Rich Analytics</a>
+        <a href="#security-cards">Enterprise Security</a>
+        <a href="#experience-cards">Advanced Experience</a>
+      </div>
+      <div class="cards-container">
+        <div id="rag-cards" class="cards">
+          <div class="card fade-in">
+            <img src="https://via.placeholder.com/52x52/005bab/ffffff?text=RAG" alt="RAG icon 1" />
+            <h3>Advanced RAG</h3>
+            <p>Hybrid search with BM25 & Cross‑Encoder re‑ranking for precise retrieval.</p>
+          </div>
+          <div class="card fade-in-delayed">
+            <img src="https://via.placeholder.com/52x52/e31937/ffffff?text=MS" alt="RAG icon 2" />
+            <h3>Multi‑Source RAG</h3>
+            <p>Connect to varied sources for comprehensive information coverage.</p>
+          </div>
+          <div class="card slide-in-left">
+            <img src="https://via.placeholder.com/52x52/00336a/ffffff?text=IS" alt="RAG icon 3" />
+            <h3>Intelligent Search</h3>
+            <p>Enhanced search capabilities with AI‑driven insights.</p>
+          </div>
+        </div>

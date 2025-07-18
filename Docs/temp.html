@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise AI Platform – Infodata2AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Branded, Animated, Modern CSS -->
+  <style>
+    :root {
+      --infomerica-blue: #005bab;
+      --infomerica-darkblue: #00336a;
+      --infomerica-red: #e31937;
+      --neutral-gray: #374151;
+      --neutral-light: #f3f4f6;
+      --section-bg: #f9fafc;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: #fff;
+      color: var(--neutral-gray);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease forwards;
+    }
+    .fade-in-delayed {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s 0.4s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      animation: slideInLeft 1s 0.3s ease forwards;
+    }
+    @keyframes slideInLeft {
+      to { opacity: 1; transform: none; }
+    }
+    .cards {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+    .cards.visible {
+      opacity: 1;
+    }
+    /* Hidden utility class */
+    .hidden {
+      display: none !important;
+    }
+    /* Scroll-triggered utility */
+    [data-scroll] {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    [data-scroll].visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Header */
+    header {
+      background: #fff;
+      color: var(--infomerica-blue);
+      border-bottom: 2px solid var(--infomerica-red);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 91, 171, 0.08);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+    .header-container img {
+      height: 40px;
+    }
+    nav a {
+      color: var(--infomerica-blue);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.2s, border-bottom 0.22s, background 0.19s;
+      font-size: 1.025rem;
+    }
+    nav a:hover, nav a.active {
+      color: var(--infomerica-red);
+      border-bottom: 2px solid var(--infomerica-red);
+      background: rgba(227,25,55,0.09);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--infomerica-red);
+      transition: width 0.3s;
+    }
+    nav a:hover::after, nav a.active::after {
+      width: 100%;
+    }
+    /* Hero */
+    .hero {
+      background: #fff;
+      color: var(--infomerica-blue);
+      padding: 6rem 2rem 5rem;
+      min-height: 680px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid var(--infomerica-red);
+    }
+    .hero img {
+      width: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      color: var(--infomerica-blue);
+      text-shadow: 2px 2px 4px rgba(0, 91, 171, 0.3), 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 650px;
+      margin: 0 auto 1.8rem;
+      color: var(--neutral-gray);
+      text-shadow: 1px 1px 3px rgba(0, 91, 171, 0.2), 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0, 91, 171, 0.11);
+      transition: transform 0.22s cubic-bezier(.3,1.85,.67,1), filter 0.25s, box-shadow 0.22s;
+      margin: 0.5rem;
+      border: none;
+      outline: none;
+    }
+    .btn-primary {
+      background: var(--infomerica-red);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: var(--infomerica-blue);
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+      transform: scale(1.045) translateY(-4px);
+      filter: brightness(1.13);
+      box-shadow: 0 6px 15px rgba(0,91,171,0.22);
+    }
+    /* Section backgrounds */
+    .section-bg {
+      background: var(--section-bg);
+      padding: 3rem 0;
+      border-bottom: 2px solid var(--infomerica-red);
+    }
+    .section-bg .content {
+      margin: 0 auto;
+    }
+    .section-bg .content h2 {
+      color: var(--infomerica-blue);
+    }
+    .section-bg .content > p {
+      color: var(--neutral-gray);
+    }
+    .content {
+      max-width: 1200px;
+      margin: 4rem auto 0;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .content h2 {
+      font-size: 2.3rem;
+      color: var(--infomerica-blue);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .content h2::after {
+      content: "";
+      width: 110px;
+      height: 3px;
+      background: var(--infomerica-red);
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      transform: translateX(-50%);
+    }
+    .content > p {
+      max-width: 740px;
+      margin: 0 auto 2rem;
+      color: var(--neutral-gray);
+      font-size: 1.1rem;
+    }
+    /* Tab navigation */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2.2rem;
+      flex-wrap: wrap;
+    }
+    .nav-tabs a {
+      color: var(--infomerica-blue);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s, border-bottom 0.22s, background 0.19s;
+      font-size: 1.07rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-tabs a:hover, .nav-tabs a.active {
+      color: var(--infomerica-red);
+      border-bottom: 2px solid var(--infomerica-red);
+      background: rgba(227,25,55,0.09);
+    }
+    /* Cards */
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #ffffff;
+      width: 260px;
+      border-radius: 12px;
+      text-align: center;
+      padding: 1.8rem 1.4rem;
+      box-shadow: 0 4px 15px rgba(0, 91, 171, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1.5px solid #e5e8ee;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 24px rgba(227,25,55,0.13);
+      border-color: var(--infomerica-red);
+    }
+    .card img {
+      width: 52px;
+      margin-bottom: 1.1rem;
+    }
+    .card h3 {
+      font-size: 1.35rem;
+      color: var(--infomerica-blue);
+      margin-bottom: 0.6rem;
+      position: relative;
+      display: inline-block;
+    }
+    .card h3::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 3px;
+      background: var(--infomerica-red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .card h3:hover::after {
+      transform: scaleX(1);
+    }
+    .card p {
+      color: var(--neutral-gray);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    /* Checklist inside card */
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    .card li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.45rem;
+      color: var(--neutral-gray);
+      font-size: 0.95rem;
+    }
+    .card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #10b981;
+      font-weight: 700;
+    }
+    /* Cloud cards section */
+    .cloud-cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    /* Testimonial Section */
+    .testimonial-section {
+      background: #f8fafc;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid var(--infomerica-red);
+    }
+    .testimonial-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .testimonial-quote {
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      position: relative;
+    }
+    .testimonial-quote::before {
+      content: "\"";
+      font-size: 4rem;
+      color: var(--infomerica-red);
+      position: absolute;
+      top: -20px;
+      left: -40px;
+      font-family: serif;
+    }
+    .testimonial-quote::after {
+      content: "\"";
+      font-size: 4rem;
+      color: var(--infomerica-red);
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      font-family: serif;
+    }
+
+    .testimonial-author {
+      font-size: 1.1rem;
+      color: var(--infomerica-blue);
+      font-weight: 600;
+    }
+    
+    /* Call to Action Section */
+    .cta-section {
+      background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .cta-section h2::after {
+      display: none;
+    }
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #e5e7eb;
+    }
+    .cta-btn {
+      background: #ff6b35;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+    }
+    
+    /* Footer */
+    footer {
+      background: #fff;
+      color: var(--infomerica-blue);
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--infomerica-red);
+    }
+    footer a {
+      color: var(--infomerica-red);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight: 500;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    /* Responsive */
+    @media(max-width: 768px) {
+      .hero h1 { font-size: 1.9rem; }
+      .hero p { font-size: 1rem; }
+      .nav-tabs {
+        overflow-x: auto;
+        gap: 1rem;
+        flex-wrap: nowrap;
+      }
+      .cards {
+        gap: 1rem;
+      }
+      .cloud-cards {
+        gap: 1rem;
+      }
+      .testimonial-quote {
+        font-size: 1.4rem;
+      }
+      .testimonial-quote::before,
+      .testimonial-quote::after {
+        font-size: 2.5rem;
+      }
+      .cta-section h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="fade-in">
+    <div class="header-container">
+      <img src="images/Info logo.png" alt="Infomerica company logo featuring stylized blue and red elements with the text Infomerica Inc, conveying a professional and innovative technology brand" />
+      <nav>
+        <a href="#platform">Home</a>
+        <a href="#model">About Us</a>
+        <a href="#analytics">Enterprise AI</a>
+        <a href="#security">Cloud Solutions</a>
+        <a href="#experience">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero fade-in-delayed">
+    <img src="images/infodata (1).png" alt="Logo" />
+    <h1>Enterprise AI Platform for Intelligent Data</h1>
+    <p>
+      Leverage state‑of‑the‑art RAG capabilities, multi‑model flexibility, and enterprise‑grade security with Infodata2AI's comprehensive solution.
+    </p>
+    <a href="#request-demo" class="btn btn-primary">Request Demo</a>
+    <a href="#platform" class="btn btn-secondary">Learn More</a>
+  </section>
+
+  <div class="section-bg">
+    <section class="content" id="platform">
+      <h2 class="fade-in">Enterprise AI Platform</h2>
+      <p class="fade-in-delayed">
+        Comprehensive end‑to‑end solution for organisations seeking to harness the power of AI with their data.
+      </p>
+      <div class="nav-tabs" id="nav-tabs">
+        <a href="#rag-cards" class="active" onclick="event.preventDefault(); showCards('rag')">RAG & Intelligence</a>
+        <a href="#model-cards" onclick="event.preventDefault(); showCards('model')">Model Management</a>
+        <a href="#analytics-cards" onclick="event.preventDefault(); showCards('analytics')">Rich Analytics</a>
+        <a href="#security-cards" onclick="event.preventDefault(); showCards('security')">Enterprise Security</a>
+        <a href="#experience-cards" onclick="event.preventDefault(); showCards('experience')">Advanced Experience</a>
+      </div>
+      <div class="cards-container">
+        <!-- RAG cards -->
+        <div id="rag-cards" class="cards">
+          <div class="card fade-in">
+            <img src="images/RAG.png" alt="RAG icon 1" />
+            <h3>Advanced RAG</h3>
+            <p>Hybrid search with BM25 & Cross‑Encoder re‑ranking for precise retrieval.</p>
+          </div>
+          <div class="card fade-in-delayed">
+            <img src="images/Multi source.png" alt="RAG icon 2" />
+            <h3>Multi‑Source RAG</h3>
+            <p>Connect to varied sources for comprehensive information coverage.</p>
+          </div>
+          <div class="card slide-in-left">
+            <img src="images/python.png" alt="RAG icon 3" />
+            <h3>Intelligent Search</h3>
+            <p>Enhanced search capabilities with AI‑driven insights.</p>
+          </div>
+        </div>
+        <!-- Model Management cards -->
+        <div id="model-cards" class="cards hidden">
+          <div class="card fade-in">
+            <img src="images/model work.png" alt="Model icon 1" />
+            <h3>Model Workspace</h3>
+            <p>Easily create and manage models with a visual builder.</p>
+          </div>
+          <div class="card fade-in-delayed">
+            <img src="images/Multi-Model.png" alt="Model icon 2" />
+            <h3>Multi‑Model Support</h3>
+            <p>Switch models seamlessly during conversations.</p>
+          </div>
+          <div class="card slide-in-left">
+            <img src="images/response.png" alt="Model icon 3" />
+            <h3>Custom Presets</h3>
+            <p>Create tailored presets for repeated use‑cases.</p>
+          </div>
+        </div>
+        <!-- Rich Analytics cards -->
+        <div id="analytics-cards" class="cards hidden">
+          <div class="card fade-in">
+            <img src="images/Conversational Data Analysis.png" alt="Analytics icon 1" />
+            <h3>Data Insights</h3>
+            <p>Gain deep, actionable insights from your data lakes.</p>
+          </div>
+          <div class="card fade-in-delayed">
+            <img src="images/Data Visualization.png" alt="Analytics icon 2" />
+            <h3>Real‑Time Reports</h3>
+            <p>Monitor KPIs and metrics in real‑time across dashboards.</p>
+          </div>
+          <div class="card slide-in-left">
+            <img src="images/Analytics for Everyone.png" alt="Analytics icon 3" />
+            <h3>Predictive Analysis</h3>
+            <p>Leverage predictive models to forecast future trends.</p>
+          </div>
+        </div>
+        <!-- Enterprise Security cards -->
+        <div id="security-cards" class="cards hidden">
+          <div class="card fade-in">
+            <img src="images/Enterprise Grade Security.png" alt="Security icon 1" />
+            <h3>Enterprise Security</h3>
+            <p>Robust protocols to safeguard mission‑critical data.</p>
+          </div>
+          <div class="card fade-in-delayed">
+            <img src="images/Content Protection.png" alt="Security icon 2" />
+            <h3>Access Control</h3>
+            <p>Fine‑grained IAM controls & policy enforcement.</p>
+          </div>
+          <div class="card slide-in-left">
+            <img src="images/Admin Controls.png" alt="Security icon 3" />
+            <h3>Encryption</h3>
+            <p>End‑to‑end encryption across data in‑motion & at‑rest.</p>
+          </div>
+        </div>
+        <!-- Advanced Experience cards -->
+        <div id="experience-cards" class="cards hidden">
+          <div class="card fade-in">
+            <img src="images/Voice & Video.png" alt="Experience icon 1" />
+            <h3>Advanced Interface</h3>
+            <p>Modern, intuitive UI design for maximum productivity.</p>
+          </div>
+          <div class="card fade-in-delayed">
+            <img src="images/Mobile Ready.png" alt="Experience icon 2" />
+            <h3>Function Calling</h3>
+            <p>Trigger functions directly from natural‑language chat.</p>
+          </div>
+          <div class="card slide-in-left">
+            <img src="images/Rich Content.png" alt="Experience icon 3" />
+            <h3>API Integration</h3>
+            <p>Seamless integration with internal & external APIs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-bg">
+    <section class="content" id="cloud">
+      <h2 class="fade-in">Enterprise‑Ready Cloud Solutions</h2>
+      <p class="fade-in-delayed">Deploy Infodata2AI on the cloud infrastructure that fits your enterprise needs.</p>
+      <div class="cloud-cards">
+        <!-- AWS -->
+        <div class="card fade-in">
+          <img src="images/AWS.png" alt="AWS icon" />
+          <h3>AWS Deployment</h3>
+          <p>Optimised EC2 infrastructure with auto‑scaling & global reach.</p>
+          <ul>
+            <li>EC2 g5 GPU instances</li>
+            <li>Elastic Auto‑Scaling</li>
+            <li>S3 integration for durable storage</li>
+            <li>IAM‑based security controls</li>
+          </ul>
+        </div>
+        <!-- Azure -->
+        <div class="card fade-in-delayed">
+          <img src="images/Azure.png" alt="Azure icon" />
+          <h3>Azure Deployment</h3>
+          <p>Enterprise‑grade compliance & seamless Microsoft ecosystem integration.</p>
+          <ul>
+            <li>Azure GPU virtual machines</li>
+            <li>Azure Active Directory SSO</li>
+            <li>Compliance‑ready certifications</li>
+            <li>99.9% SLA uptime</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section fade-in">
+    <div class="testimonial-container">
+      <div class="testimonial-quote">
+        "Info Data2AI has revolutionized how we approach enterprise AI. The combination of security, flexibility and powerful RAG capabilities has transformed our workflow completely."
+      </div>
+      <div class="testimonial-author">
+        — CTO, Infomerica.Inc
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta-section fade-in-delayed">
+    <div class="cta-container">
+      <h2>Ready to transform your AI capabilities?</h2>
+      <p>Experience the most comprehensive AI solution for enterprise data.</p>
+      <a href="#get-started" class="cta-btn">Get Started Now</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Infomerica, Inc. All rights reserved.</p>
+    <p>
+      <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a> | <a href="#contact">Contact Us</a>
+    </p>
+  </footer>
+
+  <!-- Tab switching logic -->
+  <script>
+    function showCards(tab) {
+      // Hide all card sections
+      document.querySelectorAll('.cards').forEach(set => {
+        set.classList.add('hidden');
+      });
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.nav-tabs a').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Show selected card section
+      const targetCards = document.getElementById(tab + '-cards');
+      if (targetCards) {
+        targetCards.classList.remove('hidden');
+      }
+      
+      // Add active class to clicked tab
+      const activeTab = document.querySelector(`.nav-tabs a[onclick*="${tab}"]`);
+      if (activeTab) {
+        activeTab.classList.add('active');
+      }
+    }
+    
+    // Initialize with RAG cards visible
+    document.addEventListener('DOMContentLoaded', function() {
+      showCards('rag');
+    });
+  </script>
+
+  <!-- Scroll-triggered animations -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const animatedEls = document.querySelectorAll('.fade-in, .fade-in-delayed, .slide-in-left, .cards');
+      const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            entry.target.style.opacity = '1';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      animatedEls.forEach(el => observer.observe(el));
+    });
+  </script>
+
+</body>
+</html>
